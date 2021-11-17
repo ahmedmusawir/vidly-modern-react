@@ -11,6 +11,8 @@ function Like({ like, onLike }) {
   );
 }
 
-Like.propTypes = {};
+Like.propTypes = {
+  like: PropTypes.bool.isRequired,
+};
 
 export default Like;
