@@ -5,11 +5,14 @@ import Content from '../components/layouts/Content';
 import Like from '../components/common/Like';
 import { getMovies } from '../data/fakeMovieData';
 import { getGenres } from '../data/fakeGenreData';
+// import movieData from '../data/testMovieData';
+import FilterNav from '../components/common/FilterNav';
 import './VidlyPage.scss';
 
 function VidlyPage() {
   const [movies, setMovies] = useState([]);
-  const [generes, setGeneres] = useState([]);
+  const [genres, setGeneres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState('');
 
   useEffect(() => {
     const movies = getMovies();
@@ -31,16 +34,34 @@ function VidlyPage() {
     setMovies(delMovies);
   };
 
+  const handleGenreSelect = (genre) => {
+    // console.log(genre.name);
+    setSelectedGenre(genre);
+  };
+
+  const filteredMovies = selectedGenre
+    ? movies.filter((m) => m.genre._id === selectedGenre._id)
+    : movies;
+
+  // const allMovies = selectedGenre === {} ? movies : filteredMovies;
+  // console.log('selected: ', selectedGenre);
+  // console.log('all movies: ', movies);
+  // console.log('filtered', filteredMovies);
+
   return (
     <Page wide={true} pageTitle='Modern Vidly'>
       <Row className='justify-content-center'>
         <Col sm={2}>
           <Content width='w-100' cssClassNames='bg-light'>
-            <p>It's All About The Count...</p>
+            <FilterNav
+              data={genres}
+              selectedItem={selectedGenre}
+              onItemSelect={handleGenreSelect}
+            />
           </Content>
         </Col>
         <Col sm={10}>
-          <Content width='w-100' cssClassNames='bg-light'>
+          <Content width='w-100' cssClassNames='bg-light p-3'>
             <Table responsive hover striped bordered variant='dark' size='sm'>
               <thead>
                 <tr>
@@ -53,7 +74,7 @@ function VidlyPage() {
                 </tr>
               </thead>
               <tbody>
-                {movies.map((movie) => (
+                {filteredMovies.map((movie) => (
                   <tr key={movie._id}>
                     <td>{movie.title}</td>
                     <td>{movie.genre.name}</td>

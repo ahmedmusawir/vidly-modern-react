@@ -7,7 +7,7 @@ function PageHeader({ title, subTitle }) {
   return (
     <Row className='justify-content-center'>
       <Col sm={12}>
-        <Content width='w-100' cssClassNames='bg-secondary'>
+        <Content width='w-100 p-3' cssClassNames='bg-secondary'>
           <h3>{title}</h3>
           <h6>{subTitle}</h6>
         </Content>
