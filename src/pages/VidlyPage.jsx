@@ -17,7 +17,9 @@ function VidlyPage() {
   useEffect(() => {
     const movies = getMovies();
     setMovies(movies);
-    const genres = getGenres();
+
+    // const genres = getGenres();
+    const genres = [{ name: 'All' }, ...getGenres()];
     setGeneres(genres);
   }, []);
 
@@ -35,18 +37,14 @@ function VidlyPage() {
   };
 
   const handleGenreSelect = (genre) => {
-    // console.log(genre.name);
+    console.log(genre.name);
     setSelectedGenre(genre);
   };
 
-  const filteredMovies = selectedGenre
-    ? movies.filter((m) => m.genre._id === selectedGenre._id)
-    : movies;
-
-  // const allMovies = selectedGenre === {} ? movies : filteredMovies;
-  // console.log('selected: ', selectedGenre);
-  // console.log('all movies: ', movies);
-  // console.log('filtered', filteredMovies);
+  const filteredMovies =
+    selectedGenre && selectedGenre._id
+      ? movies.filter((m) => m.genre._id === selectedGenre._id)
+      : movies;
 
   return (
     <Page wide={true} pageTitle='Modern Vidly'>

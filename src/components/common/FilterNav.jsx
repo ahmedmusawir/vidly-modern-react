@@ -11,10 +11,11 @@ function FilterNav({
 }) {
   return (
     <ListGroup>
-      {data.map((item) => (
+      {data.map((item, indx) => (
         <ListGroup.Item
           action
-          key={item[valueProperty]}
+          key={indx}
+          //   key={item[valueProperty]}
           onClick={() => onItemSelect(item)}
           className='mb-1'
           active={item === selectedItem}
