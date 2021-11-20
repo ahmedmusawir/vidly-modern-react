@@ -5,11 +5,14 @@ import Content from '../components/layouts/Content';
 import Like from '../components/common/Like';
 import { getMovies } from '../data/fakeMovieData';
 import { getGenres } from '../data/fakeGenreData';
+import { BsArrowBarUp, BsArrowBarDown } from 'react-icons/bs';
+import _ from 'lodash';
 import './VidlyPage.scss';
 
 function VidlyPage() {
   const [movies, setMovies] = useState([]);
   const [generes, setGeneres] = useState([]);
+  const [sortColumn, setSortColumn] = useState({ path: 'title', order: 'asc' });
 
   useEffect(() => {
     const movies = getMovies();
@@ -31,6 +34,23 @@ function VidlyPage() {
     setMovies(delMovies);
   };
 
+  const handleSort = (path) => {
+    // console.log(path);
+
+    if (sortColumn.path === path) {
+      sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortColumn.path = path;
+      sortColumn.order = 'asc';
+    }
+
+    setSortColumn({ ...sortColumn, order: sortColumn.order });
+    // console.log(sortColumn);
+  };
+
+  const sortedMovies = _.orderBy(movies, [sortColumn.path], [sortColumn.order]);
+  // console.log(sortedMovies);
+
   return (
     <Page wide={true} pageTitle='Modern Vidly'>
       <Row className='justify-content-center'>
@@ -44,16 +64,16 @@ function VidlyPage() {
             <Table responsive hover striped bordered variant='dark' size='sm'>
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Genre</th>
-                  <th>Stock</th>
-                  <th>Rate</th>
+                  <th onClick={() => handleSort('title')}>Title </th>
+                  <th onClick={() => handleSort('genre.name')}>Genre </th>
+                  <th onClick={() => handleSort('numberInStock')}>Stock </th>
+                  <th onClick={() => handleSort('dailyRentalRate')}>Rate </th>
                   <th></th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {movies.map((movie) => (
+                {sortedMovies.map((movie) => (
                   <tr key={movie._id}>
                     <td>{movie.title}</td>
                     <td>{movie.genre.name}</td>
