@@ -5,20 +5,22 @@ import Content from '../components/layouts/Content';
 import { Row, Col, Table, Button } from 'react-bootstrap';
 import MoviePagination from '../components/common/MoviePagination';
 import doPagination from '../utils/doPagination';
+import FilterNav from '../components/common/FilterNav';
 import { getMovies } from '../data/fakeMovieData';
 import { getGenres } from '../data/fakeGenreData';
 import './VidlyPage.scss';
 
 function VidlyPage() {
   const [movies, setMovies] = useState([]);
-  const [generes, setGeneres] = useState([]);
+  const [genres, setGeneres] = useState([]);
   const [itemsPerPage, setitemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedGenre, setSelectedGenre] = useState('');
 
   useEffect(() => {
     const movies = getMovies();
     setMovies(movies);
-    const genres = getGenres();
+    const genres = [{ id: '', name: 'All' }, ...getGenres()];
     setGeneres(genres);
   }, []);
 
@@ -36,13 +38,26 @@ function VidlyPage() {
   };
 
   const handlePageChange = (page) => {
-    // console.log(page);
     setCurrentPage(page);
   };
 
-  const count = movies.length;
+  const handleGenreSelect = (genre) => {
+    setSelectedGenre(genre);
+    setCurrentPage(1);
+  };
+
+  // FILTERING HERE ...
+  const filteredMovies =
+    selectedGenre && selectedGenre._id
+      ? movies.filter((m) => m.genre._id === selectedGenre._id)
+      : movies;
+
+  // PAGINATION HERE ...
+  const pagedMovies = doPagination(filteredMovies, currentPage, itemsPerPage);
+
+  // MOVIE COUNT & LIKE COUNTS
+  const count = filteredMovies.length;
   const likeCount = movies.filter((m) => m.like === true).length;
-  //   console.log(likeCount);
 
   if (count === 0)
     return (
@@ -50,9 +65,6 @@ function VidlyPage() {
         There is no Movies in the Database...
       </h4>
     );
-
-  const pagedMovies = doPagination(movies, currentPage, itemsPerPage);
-  //   console.log(pagedMovies);
 
   return (
     <Page wide={true} pageTitle='Modern Vidly'>
@@ -67,11 +79,15 @@ function VidlyPage() {
       <Row className='justify-content-center'>
         <Col sm={2}>
           <Content width='w-100' cssClassNames='bg-light'>
-            <p>It's All About The Count...</p>
+            <FilterNav
+              data={genres}
+              selectedItem={selectedGenre}
+              onItemSelect={handleGenreSelect}
+            />
           </Content>
         </Col>
         <Col sm={10}>
-          <Content width='w-100' cssClassNames='bg-light'>
+          <Content width='w-100' cssClassNames='bg-light p-1'>
             <Table responsive hover striped bordered variant='dark' size='sm'>
               <thead>
                 <tr>
