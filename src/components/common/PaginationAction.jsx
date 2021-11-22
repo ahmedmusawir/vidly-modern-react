@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Pagination } from 'react-bootstrap';
 import _ from 'lodash';
 
-function MoviePagination({ itemsCount, pageSize, currentPage, onPageChange }) {
+function PaginationAction({ itemsCount, pageSize, currentPage, onPageChange }) {
   const pagesCount = Math.ceil(itemsCount / pageSize);
   if (pagesCount === 1) return null;
   const pages = _.range(1, pagesCount + 1);
@@ -11,7 +11,7 @@ function MoviePagination({ itemsCount, pageSize, currentPage, onPageChange }) {
   let items = [];
 
   pages.map((page) => {
-    items.push(
+    return items.push(
       <Pagination.Item
         key={page}
         active={currentPage === page}
@@ -31,6 +31,11 @@ function MoviePagination({ itemsCount, pageSize, currentPage, onPageChange }) {
   );
 }
 
-MoviePagination.propTypes = {};
+PaginationAction.propTypes = {
+  itemsCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+};
 
-export default MoviePagination;
+export default PaginationAction;

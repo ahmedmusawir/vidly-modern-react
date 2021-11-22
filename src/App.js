@@ -8,7 +8,7 @@ function App() {
     <div className='App'>
       <PageHeader
         title='Modern Vidly'
-        subTitle='Powered by React Hooks & Compositions'
+        subTitle='Pagination + Filtering + Sorting'
       />
       <VidlyPage />
     </div>
