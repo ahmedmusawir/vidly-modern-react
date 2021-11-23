@@ -51,7 +51,7 @@ function VidlyPage() {
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
     setCurrentPage(1);
-    setSearchQuery('');
+    // setSearchQuery('');
   };
 
   const handleSort = (path) => {
@@ -59,21 +59,30 @@ function VidlyPage() {
   };
 
   const handleSearch = (query) => {
-    setCurrentPage(1);
+    // const searchQuery = e.target.value;
     setSearchQuery(query);
+
+    if (searchQuery) {
+      // console.log(searchQuery);
+    }
+
+    // if (searchQuery) {
+    //   const searchResult = movies.filter(
+    //     (m) => m.title.toLowerCase().includes(searchQuery.toLowerCase())
+    //   );
+    //   setMovies(searchResult);
+    // } else {
+    //   // REFRESHING THE PAGE TO RESET ALL MOVIES
+    //   window.location.reload();
+    // }
   };
+  // console.log(searchQuery);
 
-  // INITIALIZING MOVIES
-  let filteredMovies = movies;
-
-  // FILTERING & SEARCH HERE ...
-  if (searchQuery) {
-    filteredMovies = movies.filter((m) =>
-      m.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  } else if (selectedGenre && selectedGenre._id) {
-    filteredMovies = movies.filter((m) => m.genre._id === selectedGenre._id);
-  }
+  // FILTERING HERE ...
+  const filteredMovies =
+    selectedGenre && selectedGenre._id
+      ? movies.filter((m) => m.genre._id === selectedGenre._id)
+      : movies;
 
   // SORTING HERE ...
   const sortedMovies = _.orderBy(
