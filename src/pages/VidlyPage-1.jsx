@@ -31,21 +31,6 @@ function VidlyPage() {
     setMovies(delMovies);
   };
 
-  const handleSearch = (e) => {
-    const searchQuery = e.target.value;
-
-    if (searchQuery) {
-      const searchResult = movies.filter(
-        (m) => m.title.toLowerCase().includes(searchQuery.toLowerCase())
-        // m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );
-      setMovies(searchResult);
-    } else {
-      // REFRESHING THE PAGE TO RESET ALL MOVIES
-      window.location.reload();
-    }
-  };
-
   return (
     <Page wide={true} pageTitle='Modern Vidly'>
       <Row className='justify-content-center'>
@@ -56,14 +41,6 @@ function VidlyPage() {
         </Col>
         <Col sm={10}>
           <Content width='w-100' cssClassNames='bg-light'>
-            <input
-              className='form-control mb-1'
-              type='text'
-              name='search'
-              id='search'
-              placeholder='Search...'
-              onChange={handleSearch}
-            />
             <Table responsive hover striped bordered variant='dark' size='sm'>
               <thead>
                 <tr>
