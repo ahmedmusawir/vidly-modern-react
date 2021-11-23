@@ -6,10 +6,12 @@ import Like from '../components/common/Like';
 import { getMovies } from '../data/fakeMovieData';
 import { getGenres } from '../data/fakeGenreData';
 import './VidlyPage.scss';
+import SearchBox from '../components/common/SearchBox';
 
 function VidlyPage() {
   const [movies, setMovies] = useState([]);
   const [generes, setGeneres] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const movies = getMovies();
@@ -31,20 +33,14 @@ function VidlyPage() {
     setMovies(delMovies);
   };
 
-  const handleSearch = (e) => {
-    const searchQuery = e.target.value;
-
-    if (searchQuery) {
-      const searchResult = movies.filter(
-        (m) => m.title.toLowerCase().includes(searchQuery.toLowerCase())
-        // m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );
-      setMovies(searchResult);
-    } else {
-      // REFRESHING THE PAGE TO RESET ALL MOVIES
-      window.location.reload();
-    }
+  const handleSearch = (query) => {
+    setSearchQuery(query);
   };
+
+  const searchMovies = movies.filter(
+    (m) => m.title.toLowerCase().includes(searchQuery.toLowerCase())
+    // m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+  );
 
   return (
     <Page wide={true} pageTitle='Modern Vidly'>
@@ -56,14 +52,7 @@ function VidlyPage() {
         </Col>
         <Col sm={10}>
           <Content width='w-100' cssClassNames='bg-light'>
-            <input
-              className='form-control mb-1'
-              type='text'
-              name='search'
-              id='search'
-              placeholder='Search...'
-              onChange={handleSearch}
-            />
+            <SearchBox value={searchQuery} onChange={handleSearch} />
             <Table responsive hover striped bordered variant='dark' size='sm'>
               <thead>
                 <tr>
@@ -76,7 +65,7 @@ function VidlyPage() {
                 </tr>
               </thead>
               <tbody>
-                {movies.map((movie) => (
+                {searchMovies.map((movie) => (
                   <tr key={movie._id}>
                     <td>{movie.title}</td>
                     <td>{movie.genre.name}</td>
