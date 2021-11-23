@@ -6,6 +6,7 @@ import './App.scss';
 import MovieFormPage from './pages/MovieFormPage';
 import SamplePage from './pages/SamplePage';
 import NotFoundPage from './pages/NotFoundPage';
+import FormikTest from './pages/FormikTest';
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <Route exact path='/'>
           <VidlyPage />
         </Route>
-        <Route exact path='/movies/:id'>
-          <MovieFormPage />
+        <Route exact path='/movies/:id' component={MovieFormPage}></Route>
+        <Route exact path='/formik-test'>
+          <FormikTest />
         </Route>
         <Route exact path='/sample-page'>
           <SamplePage />

@@ -3,10 +3,17 @@ import PropTypes from 'prop-types';
 import Like from './common/Like';
 import TableMain from './common/TableMain';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function MovieTable({ movies, sortColumn, onSort, onLike, onDelete }) {
   const columns = [
-    { path: 'title', label: 'Title' },
+    {
+      path: 'title',
+      label: 'Title',
+      content: (movie) => (
+        <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
+      ),
+    },
     { path: 'genre.name', label: 'Genre' },
     { path: 'numberInStock', label: 'Stock' },
     { path: 'dailyRentalRate', label: 'Rate' },
