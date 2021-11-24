@@ -100,7 +100,7 @@ function VidlyPage() {
         </h4>
       </div>
       <Row className='justify-content-center'>
-        <Col sm={2}>
+        <Col md={2}>
           <Content width='w-100' cssClassNames='bg-light'>
             <FilterNav
               data={genres}
@@ -109,7 +109,7 @@ function VidlyPage() {
             />
           </Content>
         </Col>
-        <Col sm={10}>
+        <Col md={10}>
           <Content width='w-100' cssClassNames='bg-light p-1'>
             <SearchBox value={searchQuery} onChange={handleSearch} />
             <MovieTable
