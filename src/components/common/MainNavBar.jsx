@@ -15,6 +15,9 @@ function MainNavbar(props) {
             <Nav.Link as={Link} to='/'>
               Home
             </Nav.Link>
+            <Nav.Link as={Link} to='/form-basic'>
+              Form
+            </Nav.Link>
             <NavDropdown title='Formik' id='basic-nav-dropdown'>
               <NavDropdown.Item as={Link} to='/formik-test'>
                 Formik Basic

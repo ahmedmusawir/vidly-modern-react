@@ -49,7 +49,7 @@ function FormikTest() {
         <Col sm={12}>
           <Content width='w-100' cssClassNames='bg-secondary'>
             <h1 className='p-3'>
-              Formik Test Page <small>w/ Bootstrap Comps (buggy)</small>
+              Formik Page <small>w/ Bootstrap HTML</small>
             </h1>
           </Content>
           <Content width='w-100' cssClassNames='bg-dark'>

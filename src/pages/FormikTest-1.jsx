@@ -2,7 +2,7 @@ import React from 'react';
 import Page from '../components/layouts/Page';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Content from '../components/layouts/Content';
-import { useFormik, useFormikContext } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 function FormikTest() {
@@ -11,15 +11,10 @@ function FormikTest() {
     email: '',
     accept: false,
     gender: '',
-    tech: '',
   };
 
-  // const { resetFrom } = useFormikContext();
-  const onSubmit = (values, onSubmitProps) => {
+  const onSubmit = (values) => {
     console.log(values);
-    onSubmitProps.resetForm();
-    formik.values.gender = '';
-    formik.values.tech = '';
   };
 
   const validationSchema = Yup.object({
@@ -32,7 +27,6 @@ function FormikTest() {
       'Must accept our terms and conditions!'
     ),
     gender: Yup.string().required('Must choose a gender!'),
-    tech: Yup.string().required('Must choose a TECH!'),
   });
 
   const formik = useFormik({
@@ -48,9 +42,7 @@ function FormikTest() {
       <Row className='justify-content-center'>
         <Col sm={12}>
           <Content width='w-100' cssClassNames='bg-secondary'>
-            <h1 className='p-3'>
-              Formik Test Page <small>w/ Bootstrap Comps (buggy)</small>
-            </h1>
+            <h1 className='p-3'>Formik Test Page</h1>
           </Content>
           <Content width='w-100' cssClassNames='bg-dark'>
             <Form className='p-5' onSubmit={formik.handleSubmit}>
@@ -65,7 +57,7 @@ function FormikTest() {
                   value={formik.values.name}
                 />
                 {formik.touched.name && formik.errors.name ? (
-                  <div className='alert alert-danger'>{formik.errors.name}</div>
+                  <div className='error'>{formik.errors.name}</div>
                 ) : null}
               </Form.Group>
 
@@ -80,9 +72,7 @@ function FormikTest() {
                   value={formik.values.email}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <div className='alert alert-danger'>
-                    {formik.errors.email}
-                  </div>
+                  <div className='error'>{formik.errors.email}</div>
                 ) : null}
                 <Form.Text className='text-muted'>
                   We'll never share your email with anyone else.
@@ -99,15 +89,13 @@ function FormikTest() {
                   value={formik.values.accept}
                 />
                 {formik.touched.accept && formik.errors.accept ? (
-                  <div className='alert alert-danger'>
-                    {formik.errors.accept}
-                  </div>
+                  <div className='error'>{formik.errors.accept}</div>
                 ) : null}
               </Form.Group>
 
               <hr className='bg-info' />
-              <Form.Text className='mb-2'>Please choose your Gender:</Form.Text>
-              <Form.Group className='mb-3' controlId='formBasicRadio'>
+              <Form.Text className=''>Please choose your Gender...</Form.Text>
+              <Form.Group className='mb-3' controlId='formBasicCheckbox'>
                 <Form.Check
                   name='gender'
                   type='radio'
@@ -125,43 +113,12 @@ function FormikTest() {
                   value='female'
                 />
                 {formik.touched.gender && formik.errors.gender ? (
-                  <div className='alert alert-danger'>
-                    {formik.errors.gender}
-                  </div>
-                ) : null}
-              </Form.Group>
-              <hr className='bg-info' />
-              <Form.Text className='mb-2'>
-                Please choose a Technology:
-              </Form.Text>
-              <Form.Group className='mb-3' controlId='formBasicCheckbox'>
-                <Form.Control
-                  as='select'
-                  name='tech'
-                  value={formik.values.tech}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                >
-                  <option>Choose A Tech</option>
-                  <option value='react'>React</option>
-                  <option value='next-js'>Next JS</option>
-                  <option value='graph-ql'>GraphQL</option>
-                </Form.Control>
-                {formik.touched.tech && formik.errors.tech ? (
-                  <div className='alert alert-danger'>{formik.errors.tech}</div>
+                  <div className='error'>{formik.errors.gender}</div>
                 ) : null}
               </Form.Group>
 
               <Button variant='primary' type='submit'>
                 Submit
-              </Button>
-              <Button
-                className='ml-1'
-                variant='warning'
-                type='reset'
-                onClick={() => formik.resetForm()}
-              >
-                Reset
               </Button>
             </Form>
           </Content>
