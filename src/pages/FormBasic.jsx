@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Page from '../components/layouts/Page';
 import { Row, Col } from 'react-bootstrap';
 import Content from '../components/layouts/Content';
@@ -7,16 +7,27 @@ function FormBasic() {
   const [name, setName] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [gender, setGender] = useState('');
-
-  console.log(isChecked);
+  const [location, setLocation] = useState('');
+  const [comment, setComment] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // FORM VALUE OBJECT
     const values = {
       userName: name,
+      accept: isChecked,
+      gender: gender,
+      location: location,
+      comment: comment,
     };
+    // DISPLAY VALUE
     console.log('Form Values: ', values);
+    // RESETTING THE FORM AFTER SUBMIT
     setName('');
+    setIsChecked(false);
+    setGender('');
+    setLocation('');
+    setComment('');
     e.target.reset();
   };
   return (
@@ -24,16 +35,23 @@ function FormBasic() {
       <Row className='justify-content-center'>
         <Col sm={12}>
           <Content width='w-100' cssClassNames='bg-light'>
+            {/* DISPLAY BOX */}
             <div className='alert alert-primary'>Name: {name}</div>
             <div
               className={
                 isChecked ? 'alert alert-success' : 'alert alert-danger'
               }
             >
-              Accept: {isChecked ? 'True' : 'Lying Trump'}
+              Accept: {isChecked ? 'True' : 'False'}
             </div>
             <div className='alert alert-warning'>Gender: {gender}</div>
+            <div className='alert alert-info'>Location: {location}</div>
+            <div className='alert alert-dark'>Comment: {comment}</div>
+            {/* END DISPLAY BOX */}
+
+            {/* SIMPLE FORM */}
             <form className='p-5 bg-secondary' onSubmit={handleSubmit}>
+              {/* TEXT INPUT */}
               <div className='mb-2'>
                 <label htmlFor='userName' className='form-label'>
                   User Name
@@ -47,6 +65,7 @@ function FormBasic() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
+              {/* CHECKBOX */}
               <div className='form-check pb-1 mb-2'>
                 <input
                   className='form-check-input'
@@ -59,11 +78,12 @@ function FormBasic() {
                   Accept Privacy Policy
                 </label>
               </div>
+              {/* RADIO BUTTONS */}
               <div className='form-check'>
                 <input
                   className='form-check-input'
                   type='radio'
-                  //   name='flexRadioDefault'
+                  name='flexRadioDefault'
                   id='flexRadioDefault1'
                   value='male'
                   onChange={(e) => setGender(e.target.value)}
@@ -77,7 +97,7 @@ function FormBasic() {
                 <input
                   className='form-check-input'
                   type='radio'
-                  //   name='flexRadioDefault'
+                  name='flexRadioDefault'
                   id='flexRadioDefault2'
                   value='female'
                   onChange={(e) => setGender(e.target.value)}
@@ -86,6 +106,34 @@ function FormBasic() {
                 <label className='form-check-label' htmlFor='flexRadioDefault2'>
                   Female
                 </label>
+              </div>
+              <hr className='bg-primary' />
+              {/* SELECT BOX */}
+              <select
+                name='locationSelect'
+                className='form-control'
+                aria-label='Default select example'
+                onChange={(e) => setLocation(e.target.value)}
+              >
+                <option defaultValue=''>Choose A Location</option>
+                <option value='paris'>Paris</option>
+                <option value='kuala lumpur'>KL</option>
+                <option value='sarasota'>Sarasota</option>
+              </select>
+              {/* TEXT AREA */}
+              <div class='mb-3'>
+                <label
+                  for='exampleFormControlTextarea1'
+                  className='form-label mt-2'
+                >
+                  LEAVE A COMMENT
+                </label>
+                <textarea
+                  className='form-control'
+                  id='exampleFormControlTextarea1'
+                  rows='3'
+                  onChange={(e) => setComment(e.target.value)}
+                ></textarea>
               </div>
               <hr className='bg-primary' />
               <button className='btn btn-primary' type='submit'>

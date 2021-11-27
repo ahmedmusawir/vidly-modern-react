@@ -2,7 +2,7 @@ import React from 'react';
 import Page from '../components/layouts/Page';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import Content from '../components/layouts/Content';
-import { useFormik, useFormikContext } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 function FormikTest() {

@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import FormikTest from './pages/FormikTest';
 import MainNavbar from './components/common/MainNavBar';
 import FormBasic from './pages/FormBasic';
+import FormikHtml from './pages/FormikHtml';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         {/* THE PARAMS WON'T PASS THE FOLLOWING WAY */}
         <Route exact path='/formik-test'>
           <FormikTest />
+        </Route>
+        <Route exact path='/formik-html'>
+          <FormikHtml />
         </Route>
         <Route exact path='/form-basic'>
           <FormBasic />

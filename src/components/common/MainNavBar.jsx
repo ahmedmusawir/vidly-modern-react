@@ -22,8 +22,15 @@ function MainNavbar(props) {
               <NavDropdown.Item as={Link} to='/formik-test'>
                 Formik Basic
               </NavDropdown.Item>
-              <NavDropdown.Item to='#'>Formik Component</NavDropdown.Item>
-              <NavDropdown.Item to='#'>Formik Library</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/'>
+                Formik Component
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/formik-html'>
+                Formik HTML
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/'>
+                Formik Library
+              </NavDropdown.Item>
               {/* <NavDropdown.Divider />
               <NavDropdown.Item href='#action/3.4'>
                 Separated link
