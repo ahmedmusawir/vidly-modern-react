@@ -20,13 +20,13 @@ function MainNavbar(props) {
             </Nav.Link>
             <NavDropdown title='Formik' id='basic-nav-dropdown'>
               <NavDropdown.Item as={Link} to='/formik-test'>
-                Formik Basic
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to='/'>
-                Formik Component
+                Formik w React Bootstrap
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/formik-html'>
                 Formik HTML
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/formik-comp'>
+                Formik Component
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to='/'>
                 Formik Library

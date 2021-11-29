@@ -15,10 +15,9 @@ function FormikHtml() {
     comment: '',
   };
 
-  // const { resetFrom } = useFormikContext();
-  const onSubmit = (values) => {
+  const onSubmit = ({ values, actions }) => {
     console.log(values);
-    formik.resetForm();
+    console.log(actions);
   };
 
   const validationSchema = Yup.object({
@@ -49,7 +48,7 @@ function FormikHtml() {
         <Col sm={12}>
           <Content width='w-100' cssClassNames='bg-secondary'>
             <h4 className='p-3'>
-              Formik Page <small>w/ Bootstrap HTML</small>
+              Formik Page <small>w/ Formik Component</small>
             </h4>
           </Content>
           <Content width='w-100' cssClassNames='bg-dark'>
@@ -66,7 +65,7 @@ function FormikHtml() {
                   id='userName'
                   placeholder='User Name'
                   className={
-                    formik.errors.userName
+                    formik.touched.userName && formik.errors.userName
                       ? 'form-control is-invalid'
                       : 'form-control'
                   }
@@ -91,7 +90,7 @@ function FormikHtml() {
                   id='userEmail'
                   placeholder='User Email'
                   className={
-                    formik.errors.userEmail
+                    formik.touched.userEmail && formik.errors.userEmail
                       ? 'form-control is-invalid'
                       : 'form-control'
                   }
@@ -170,7 +169,7 @@ function FormikHtml() {
                 <select
                   name='location'
                   className={
-                    formik.errors.location
+                    formik.touched.location && formik.errors.location
                       ? 'form-control is-invalid'
                       : 'form-control'
                   }
@@ -201,7 +200,7 @@ function FormikHtml() {
                 <textarea
                   name='comment'
                   className={
-                    formik.errors.comment
+                    formik.touched.comment && formik.errors.comment
                       ? 'form-control is-invalid'
                       : 'form-control'
                   }

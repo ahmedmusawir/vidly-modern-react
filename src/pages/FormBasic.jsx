@@ -121,9 +121,9 @@ function FormBasic() {
                 <option value='sarasota'>Sarasota</option>
               </select>
               {/* TEXT AREA */}
-              <div class='mb-3'>
+              <div className='mb-3'>
                 <label
-                  for='exampleFormControlTextarea1'
+                  htmlFor='exampleFormControlTextarea1'
                   className='form-label mt-2'
                 >
                   LEAVE A COMMENT

@@ -9,6 +9,7 @@ import FormikTest from './pages/FormikTest';
 import MainNavbar from './components/common/MainNavBar';
 import FormBasic from './pages/FormBasic';
 import FormikHtml from './pages/FormikHtml';
+import FormikComp from './pages/FormikComp';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route exact path='/formik-html'>
           <FormikHtml />
+        </Route>
+        <Route exact path='/formik-comp'>
+          <FormikComp />
         </Route>
         <Route exact path='/form-basic'>
           <FormBasic />
