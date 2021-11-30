@@ -53,7 +53,7 @@ function FormikComp() {
               onSubmit={onSubmit}
               validationSchema={validationSchema}
             >
-              <Form className='p-3 bg-light'>
+              <Form className='p-3 bg-light formik-comp'>
                 {/* TEXT INPUT */}
                 <div className='mb-2'>
                   <label htmlFor='userName' className='form-label'>
