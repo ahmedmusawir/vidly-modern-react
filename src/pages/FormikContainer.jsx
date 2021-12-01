@@ -12,6 +12,7 @@ function FormikContainer() {
     userName: '',
     userPassword: '',
     userEmail: '',
+    userBirthDate: null,
     accept: false,
     countries: [],
     gender: '',
@@ -53,6 +54,9 @@ function FormikContainer() {
       [true],
       'Must accept our terms and conditions!'
     ),
+    userBirthDate: Yup.date()
+      .required('Must insert a Date of Birth')
+      .nullable(),
     countries: Yup.array().min(1, 'Must choose at least one country'),
     gender: Yup.string().required('Must choose a Gender!'),
     location: Yup.string().required('Must choose a location!'),
@@ -121,6 +125,14 @@ function FormikContainer() {
                           ? 'form-control is-invalid'
                           : 'form-control'
                       }
+                    />
+                  </div>
+                  {/* DATEPICKER */}
+                  <div className='mb-3'>
+                    <FormikControl
+                      control='date'
+                      name='userBirthDate'
+                      label='Date of Birth'
                     />
                   </div>
                   <hr className='bg-primary' />
