@@ -34,7 +34,6 @@ function DatePicker({ label, name, options, ...rest }) {
 DatePicker.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
 };
 
 export default DatePicker;

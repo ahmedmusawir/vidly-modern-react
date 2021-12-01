@@ -51,38 +51,29 @@ function VidlyPage() {
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
     setCurrentPage(1);
-    // setSearchQuery('');
+    setSearchQuery('');
   };
 
-  const handleSort = (path) => {
+  const handleSort = () => {
     setSortColumn({ ...sortColumn, order: sortColumn.order });
   };
 
   const handleSearch = (query) => {
-    // const searchQuery = e.target.value;
+    setCurrentPage(1);
     setSearchQuery(query);
-
-    if (searchQuery) {
-      // console.log(searchQuery);
-    }
-
-    // if (searchQuery) {
-    //   const searchResult = movies.filter(
-    //     (m) => m.title.toLowerCase().includes(searchQuery.toLowerCase())
-    //   );
-    //   setMovies(searchResult);
-    // } else {
-    //   // REFRESHING THE PAGE TO RESET ALL MOVIES
-    //   window.location.reload();
-    // }
   };
-  // console.log(searchQuery);
 
-  // FILTERING HERE ...
-  const filteredMovies =
-    selectedGenre && selectedGenre._id
-      ? movies.filter((m) => m.genre._id === selectedGenre._id)
-      : movies;
+  // INITIALIZING MOVIES
+  let filteredMovies = movies;
+
+  // FILTERING & SEARCH HERE ...
+  if (searchQuery) {
+    filteredMovies = movies.filter((m) =>
+      m.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  } else if (selectedGenre && selectedGenre._id) {
+    filteredMovies = movies.filter((m) => m.genre._id === selectedGenre._id);
+  }
 
   // SORTING HERE ...
   const sortedMovies = _.orderBy(
@@ -109,7 +100,7 @@ function VidlyPage() {
         </h4>
       </div>
       <Row className='justify-content-center'>
-        <Col sm={2}>
+        <Col md={2}>
           <Content width='w-100' cssClassNames='bg-light'>
             <FilterNav
               data={genres}
@@ -118,7 +109,7 @@ function VidlyPage() {
             />
           </Content>
         </Col>
-        <Col sm={10}>
+        <Col md={10}>
           <Content width='w-100' cssClassNames='bg-light p-1'>
             <SearchBox value={searchQuery} onChange={handleSearch} />
             <MovieTable

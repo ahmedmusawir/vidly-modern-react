@@ -27,18 +27,6 @@ function FormikContainer() {
     { key: 'Sarasota', value: 'sarasota-fl' },
   ];
 
-  const radioOptions = [
-    { key: 'Male', value: 'male' },
-    { key: 'Female', value: 'female' },
-    { key: 'Other', value: 'other' },
-  ];
-
-  const checkboxOptions = [
-    { key: 'U.S.A', value: 'united-state' },
-    { key: 'Malaysia', value: 'malaysia' },
-    { key: 'India', value: 'india' },
-  ];
-
   const onSubmit = (values, { resetForm }) => {
     console.log(values);
     // resetForm({ values: initialValues });
@@ -100,7 +88,7 @@ function FormikContainer() {
                   <div className='mb-2'>
                     <FormikControl
                       control='input'
-                      type='password'
+                      type='text'
                       name='userPassword'
                       label='User Password'
                       placeholder='Your Password'
@@ -116,7 +104,7 @@ function FormikContainer() {
                   <div className='mb-2'>
                     <FormikControl
                       control='input'
-                      type='email'
+                      type='text'
                       name='userEmail'
                       label='User Email'
                       placeholder='Your Email'
@@ -127,27 +115,33 @@ function FormikContainer() {
                       }
                     />
                   </div>
-                  {/* DATEPICKER */}
-                  <div className='mb-3'>
-                    <FormikControl
-                      control='date'
-                      name='userBirthDate'
-                      label='Date of Birth'
-                    />
-                  </div>
+
                   <hr className='bg-primary' />
 
                   {/* CHECKBOX */}
-                  <FormikControl
-                    control='checkbox'
-                    name='accept'
-                    label='Accept Privacy Policy'
-                  />
-
+                  <div className='form-check pb-1 mb-2'>
+                    <Field
+                      name='accept'
+                      className='form-check-input'
+                      type='checkbox'
+                      id='flexCheckDefault'
+                    />
+                    <label
+                      className='form-check-label'
+                      htmlFor='flexCheckDefault'
+                    >
+                      Accept Privacy Policy
+                    </label>
+                    <ErrorMessage
+                      name='accept'
+                      component='div'
+                      className='alert alert-danger'
+                    />
+                  </div>
                   {/* CHECKBOX GROUP */}
                   <div className='mb-3'>
                     <FormikControl
-                      control='checkbox-group'
+                      control='checkbox'
                       name='countries'
                       label='Countries Visited:'
                       options={checkboxOptions}

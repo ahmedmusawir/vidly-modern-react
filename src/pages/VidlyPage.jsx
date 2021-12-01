@@ -6,11 +6,12 @@ import doPagination from '../utils/doPagination';
 import MovieTable from '../components/MovieTable';
 import FilterNav from '../components/common/FilterNav';
 import PaginationAction from '../components/common/PaginationAction';
+import SearchBox from '../components/common/SearchBox';
+import { Link } from 'react-router-dom';
 import { getMovies } from '../data/fakeMovieData';
 import { getGenres } from '../data/fakeGenreData';
 import _ from 'lodash';
 import './VidlyPage.scss';
-import SearchBox from '../components/common/SearchBox';
 
 function VidlyPage() {
   const [movies, setMovies] = useState([]);
@@ -54,7 +55,7 @@ function VidlyPage() {
     setSearchQuery('');
   };
 
-  const handleSort = (path) => {
+  const handleSort = () => {
     setSortColumn({ ...sortColumn, order: sortColumn.order });
   };
 
@@ -91,6 +92,9 @@ function VidlyPage() {
 
   return (
     <Page wide={true} pageTitle='Modern Vidly'>
+      <Link to='/movies/new' className='btn btn-primary'>
+        Add New Movie
+      </Link>
       <div className='text-right'>
         <h4>
           <span className='badge badge-secondary'>
